@@ -4,7 +4,7 @@
   "description": "Angular.js 1.x module for changing AdoPisoWiFi Timer Settings",
   "main": "dist/ado-ng-timer-settings.js",
   "scripts": {
-    "publish-package": "git push && git push --tags && npm publish"
+    "publish-package": "git push && git push --tags && npm publish --access public"
   },
   "repository": {
     "type": "git",
