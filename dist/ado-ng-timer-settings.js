@@ -9,7 +9,7 @@ angular.module('ado.timer-settings.tpls', []).run(['$templateCache', function($t
 
   App.component('adoTimerSettings', {
     controller: 'AdoTimerSettingsCtrl',
-    templateUrl: '/timer-settings.html'
+    templateUrl: './timer-settings.html'
   });
 
   App.controller('AdoTimerSettingsCtrl', [
