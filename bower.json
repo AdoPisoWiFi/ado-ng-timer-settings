@@ -1,0 +1,21 @@
+{
+  "name": "ado-ng-timer-settings",
+  "description": "Angular.js 1.x module for changing AdoPisoWiFi Timer Settings",
+  "main": "dist/ado-ng-timer-settings.js",
+  "authors": [
+    "AdoPisoWiFi"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "adopisowifi",
+    "timer-settings"
+  ],
+  "homepage": "https://github.com/AdoPisoWiFi/ado-ng-timer-settings",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
