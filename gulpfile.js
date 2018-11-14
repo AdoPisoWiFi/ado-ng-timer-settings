@@ -19,7 +19,7 @@ function templates() {
 }
 
 function build() {
-  return src(['.tmp/**/*.js', 'src/**/*/js'])
+  return src(['.tmp/**/*.js', 'src/**/*.js'])
     .pipe(concat('ado-ng-timer-settings.js'))
     .pipe(dest('./dist'))
 }
