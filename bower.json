@@ -1,7 +1,7 @@
 {
   "name": "ado-ng-timer-settings",
   "description": "Angular.js 1.x module for changing AdoPisoWiFi Timer Settings",
-  "main": "dist/ado-ng-timer-settings.js",
+  "main": "./dist/ado-ng-timer-settings.js",
   "authors": [
     "AdoPisoWiFi"
   ],
