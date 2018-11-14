@@ -12,6 +12,7 @@ function clean() {
 function templates() {
   return src('./src/**/*.html')
     .pipe(ngTemplates({
+      root: '.',
       module: 'ado.timer-settings.tpls',
       standalone: true
     }))

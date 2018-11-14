@@ -8,7 +8,7 @@
 
   App.component('adoTimerSettings', {
     controller: 'AdoTimerSettingsCtrl',
-    templateUrl: 'app/components/timer-settings/src/timer-settings.html'
+    templateUrl: './timer-settings.html'
   });
 
   App.controller('AdoTimerSettingsCtrl', [
