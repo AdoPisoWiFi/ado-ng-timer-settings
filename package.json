@@ -1,0 +1,29 @@
+{
+  "name": "ado-ng-timer-settings",
+  "version": "0.0.1",
+  "description": "Angular.js 1.x module for changing AdoPisoWiFi Timer Settings",
+  "main": "dist/ado-ng-timer-settings.js",
+  "scripts": {
+    "publish-package": "git push && git push --tags && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdoPisoWiFi/ado-ng-timer-settings.git"
+  },
+  "keywords": [
+    "adopisowifi",
+    "timer-settings"
+  ],
+  "author": "AdoPisoWiFi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdoPisoWiFi/ado-ng-timer-settings/issues"
+  },
+  "homepage": "https://github.com/AdoPisoWiFi/ado-ng-timer-settings#readme",
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-angular-templatecache": "^2.2.5",
+    "gulp-concat": "^2.6.1"
+  }
+}

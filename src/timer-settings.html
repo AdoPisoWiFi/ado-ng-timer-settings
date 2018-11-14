@@ -1,0 +1,195 @@
+
+
+<h4>Rates</h4>
+
+<a class="btn btn-sm btn-primary" ng-click="$ctrl.newCredit()">
+  <i class="fa fa-plus"></i>
+  Add New Rate
+</a>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        <span class="hidden-xs hidden-sm">Pulses</span>
+        <span class="hidden-md hidden-lg">Pulses/Amount</span>
+      </th>
+      <th class="hidden-xs hidden-sm">Amount</th>
+      <th>Time</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr ng-repeat="t in $ctrl.settings.timer" class="editable-row">
+      <td>
+        <span editable-number="t.pulse" e-name="pulse" e-form="rowform" e-required e-class="form-control">
+          {{ t.pulse }}
+        </span>
+      </td>
+      <td class="hidden-xs hidden-sm">
+        <span ng-show="$ctrl.inserted == t">(amount = pulses)</span>
+        <span ng-show="$ctrl.inserted != t">
+          {{ t.pulse | number:2 }}
+        </span>
+      </td>
+      <td class="select-td" ng-class="{'text-danger': !t.minutes || t.credits <= 0}">
+        <span editable-number="t.minutes" e-name="minutes" e-form="rowform" e-class="form-control" e-required>
+          {{ t.minutes * 60 | datetimeToNow:'short' }}
+        </span>
+        <span class="help-block" ng-if="rowform.$visible">(input in minutes)</span>
+      </td>
+      <td>
+        <form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" onbeforesave="$ctrl.updateTimer($index, $data)" oncancel="onCancel(i, t)" shown="$ctrl.inserted == t">
+          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">
+            Save
+          </button>
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">
+            Cancel
+          </button>
+        </form>
+        <div class="buttons" ng-show="!rowform.$visible">
+          <button class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">Edit</button>
+          <button class="btn btn-danger editable-table-button btn-xs" ng-click="$ctrl.removeCredit($index)">Delete</button>
+        </div>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<hr>
+
+<form name="timerForm">
+  <div class="row">
+
+    <div class="col-md-6">
+
+      <h4>Pause Time Settings</h4>
+
+      <div class="checkbox">
+        <label class="custom-checkbox">
+          <input type="checkbox" name="allow_pause" ng-model="$ctrl.settings.allow_pause">
+          <span>
+            Allow users to pause time?
+          </span>
+        </label>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error' : timerForm.allow_pause_time.$invalid, 'has-success': timerForm.allow_pause_time.$valid && timerForm.allow_pause_time.$touched}">
+        <label>
+          Allow pause if user's time is less than <mark>{{$ctrl.allow_pause_time}}</mark> hour(s)?
+        </label>
+        <input type="number" min="1" class="form-control" ng-model="$ctrl.allow_pause_time" name="allow_pause_time" required>
+        <span class="help-block" ng-if="timerForm.allow_pause_time.$error.required">Required.</span>
+        <span class="help-block" ng-if="timerForm.allow_pause_time.$error.min">Minimum of 1 hour</span>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error' : timerForm.allow_pause_validity.$invalid, 'has-success': timerForm.allow_pause_validity.$valid && timerForm.allow_pause_validity.$touched}">
+        <label>Pause Time Validity (in hours)</label>
+        <input type="number" min="1" class="form-control" ng-model="$ctrl.allow_pause_validity" name="allow_pause_validity" required>
+        <span class="help-block" ng-if="timerForm.allow_pause_validity.$error.required">Required.</span>
+        <span class="help-block" ng-if="timerForm.allow_pause_validity.$error.min">Minimum of 1 hour</span>
+      </div>
+
+      <div class="checkbox">
+        <label class="custom-checkbox">
+          <input type="checkbox" name="auto_continue_time" ng-model="$ctrl.settings.auto_continue_time">
+          <span>
+            Automatically continue users timer after reboot/shutdown?
+          </span>
+        </label>
+      </div>
+
+      <hr>
+
+      <h4>Counter Settings</h4>
+
+      <div class="form-group" ng-class="{'has-error' : timerForm.waiting.$invalid, 'has-success': timerForm.waiting.$valid && timerForm.waiting.$touched}">
+        <label>How many seconds to wait for customer to pay?</label>
+        <input type="number" min="5" class="form-control" ng-model="$ctrl.settings.counter_timer" name="waiting" required>
+        <span class="help-block" ng-if="timerForm.waiting.$error.required">Required.</span>
+        <span class="help-block" ng-if="timerForm.waiting.$error.min">Minimum of 5 seconds</span>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error' : timerForm.max_payment_retries.$invalid, 'has-success': timerForm.max_payment_retries.$valid && timerForm.max_payment_retries.$touched}">
+        <label>How many insert coin retries to allow before suspending user?</label>
+        <input type="number" min="1" class="form-control" ng-model="$ctrl.settings.max_payment_retries" name="max_payment_retries" required>
+        <span class="help-block" ng-if="timerForm.max_payment_retries.$error.required">Required.</span>
+        <span class="help-block" ng-if="timerForm.max_payment_retries.$error.min">Minimum of 1</span>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error' : timerForm.wait_payment_seconds.$invalid, 'has-success': timerForm.wait_payment_seconds.$valid && timerForm.wait_payment_seconds.$touched}">
+        <label>How many minutes to suspend user after max insert coin retries reached?</label>
+        <input type="number" min="1" class="form-control" ng-model="$ctrl.wait_payment_seconds" name="wait_payment_seconds" required>
+        <span class="help-block" ng-if="timerForm.wait_payment_seconds.$error.required">Required.</span>
+        <span class="help-block" ng-if="timerForm.wait_payment_seconds.$error.min">Minimum of 1</span>
+      </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+      <h4>Coinslot Wiring Settings</h4>
+
+      <div ng-show="$ctrl.settings.hardware.model == 'raspberry_pi_3'" class="form-group" ng-class="{'has-error' : timerForm.sensor.$invalid, 'has-success': timerForm.sensor.$valid && timerForm.sensor.$dirty}">
+        <label>Coinslot Sensor Version</label>
+        <select class="form-control" ng-options="v as v for v in [1,2]" ng-model="$ctrl.settings.coinslot_sensor_version" name="sensor" required>
+        </select>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error' : timerForm.coinslot_gpio_pin.$invalid, 'has-success': timerForm.coinslot_gpio_pin.$valid && timerForm.coinslot_gpio_pin.$touched}">
+        <label>GPIO Pin for coin/white wire</label>
+        <select name="coinslot_gpio_pin" class="form-control" ng-model="$ctrl.settings.coinslot_gpio_pin" ng-options="pin as pin for pin in $ctrl.pins" required></select>
+        <span gpio-pin-numbering class="help-block"><a>CLICK HERE TO SHOW GPIO NUMBERING ON THE BOARD</a></span>
+      </div>
+      <hr>
+      <h4>Relay Settings</h4>
+
+      <div class="radio">
+        <label>
+          <input type="radio" name="active" ng-model="$ctrl.settings.coinslot_relay_active_low" ng-value="true">
+          Relay module is active low
+        </label>
+      </div>
+
+      <div class="radio">
+        <label>
+          <input type="radio" name="active" ng-model="$ctrl.settings.coinslot_relay_active_low" ng-value="false">
+          Relay module is active high
+        </label>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error' : timerForm.delay.$invalid, 'has-success': timerForm.delay.$valid && timerForm.delay.$dirty}">
+        <label>Coinslot Relay Delay (in seconds)</label>
+        <input type="number" min="0" class="form-control" ng-model="$ctrl.settings.coinslot_relay_delay" name="delay" required>
+        <span class="help-block" ng-if="timerForm.delay.$error.required">Required.</span>
+        <span class="help-block" ng-if="timerForm.delay.$error.min">Minimum of 0 seconds</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <hr>
+
+  <save-config-btn config="{
+  coinslot_relay_active_low: $ctrl.settings.coinslot_relay_active_low,
+  coinslot_sensor_version: $ctrl.settings.coinslot_sensor_version,
+  coinslot_gpio_pin: $ctrl.settings.coinslot_gpio_pin,
+  coinslot_relay_delay: $ctrl.settings.coinslot_relay_delay,
+  allow_pause_time: $ctrl.allow_pause_time*60*60,
+  allow_pause_validity: $ctrl.allow_pause_validity*60*60,
+  auto_continue_time: $ctrl.settings.auto_continue_time,
+  counter_timer: $ctrl.settings.counter_timer,
+  max_payment_retries: $ctrl.settings.max_payment_retries,
+  wait_payment_seconds: $ctrl.wait_payment_seconds * 60,
+  allow_pause: $ctrl.settings.allow_pause
+  }" ng-disabled="timerForm.$invalid || timerForm.$pristine">Save Changes</save-config-btn>
+
+</form>
+
+<hr>
+<p>
+Coinslot not working? <a href="http://adopisowifi.com/articles/fix-coinslot-not-working/" target="_blank">Try these solutions.</a>
+</p>
