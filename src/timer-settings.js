@@ -2,6 +2,7 @@
 'use strict';
 
   var App = angular.module('ado.timer-settings', [
+    'ado.seconds-format',
     'ado.save-config-btn',
     'ado.timer-settings.tpls'
   ]);

@@ -35,7 +35,7 @@
       </td>
       <td class="select-td" ng-class="{'text-danger': !t.minutes || t.credits <= 0}">
         <span editable-number="t.minutes" e-name="minutes" e-form="rowform" e-class="form-control" e-required>
-          {{ t.minutes * 60 | datetimeToNow:'short' }}
+          {{ t.minutes * 60 | adotime:'short' }}
         </span>
         <span class="help-block" ng-if="rowform.$visible">(input in minutes)</span>
       </td>
