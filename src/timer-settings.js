@@ -8,7 +8,10 @@
 
   App.component('adoTimerSettings', {
     controller: 'AdoTimerSettingsCtrl',
-    templateUrl: './timer-settings.html'
+    templateUrl: './timer-settings.html',
+    bindings: {
+      deviceId: '<'
+    }
   });
 
   App.controller('AdoTimerSettingsCtrl', [
@@ -27,7 +30,7 @@
       $ctrl.config = {};
       $ctrl.settings = {};
 
-      adoConfigService.get()
+      adoConfigService.get({id: $ctrl.deviceId})
         .then(function (res) {
           return parseScopeConfig(res);
         });
@@ -49,7 +52,7 @@
             t.credits = t.pulse;
             return t;
           });
-        return adoConfigService.update({timer: timer})
+        return adoConfigService.update({timer: timer}, {id: $ctrl.deviceId})
           .then(function (res) {
             parseScopeConfig(res);
             return true;
