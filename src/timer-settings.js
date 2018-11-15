@@ -25,6 +25,7 @@
 
       $ctrl.$onInit = function() {
 
+        $ctrl.device = $ctrl.device || {};
 
         var model_pins = {
           raspberry_pi_3: [3, 7, 11],
