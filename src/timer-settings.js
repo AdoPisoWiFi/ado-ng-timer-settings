@@ -4,7 +4,8 @@
   var App = angular.module('ado.timer-settings', [
     'ado.seconds-format',
     'ado.save-config-btn',
-    'ado.timer-settings.tpls'
+    'ado.timer-settings.tpls',
+    'ado.ng-rpi3-gpio-ref'
   ]);
 
   App.component('adoTimerSettings', {

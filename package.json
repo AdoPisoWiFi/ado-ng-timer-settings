@@ -1,6 +1,6 @@
 {
   "name": "@adopisowifi/ng-timer-settings",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Angular.js 1.x module for changing AdoPisoWiFi Timer Settings",
   "main": "dist/ado-ng-timer-settings.js",
   "scripts": {
@@ -25,5 +25,8 @@
     "gulp": "^4.0.0",
     "gulp-angular-templatecache": "^2.2.5",
     "gulp-concat": "^2.6.1"
+  },
+  "dependencies": {
+    "@adopisowifi/ng-rpi3-gpio-ref": "^1.0.0"
   }
 }

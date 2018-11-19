@@ -141,7 +141,7 @@
       <div class="form-group" ng-class="{'has-error' : timerForm.coinslot_gpio_pin.$invalid, 'has-success': timerForm.coinslot_gpio_pin.$valid && timerForm.coinslot_gpio_pin.$touched}">
         <label>GPIO Pin for coin/white wire</label>
         <select name="coinslot_gpio_pin" class="form-control" ng-model="$ctrl.settings.coinslot_gpio_pin" ng-options="pin as pin for pin in $ctrl.pins" required></select>
-        <span gpio-pin-numbering class="help-block"><a>CLICK HERE TO SHOW GPIO NUMBERING ON THE BOARD</a></span>
+        <span ado-rpi3-gpio-ref class="help-block"><a>CLICK HERE TO SHOW GPIO NUMBERING ON THE BOARD</a></span>
       </div>
       <hr>
       <h4>Relay Settings</h4>

@@ -20,6 +20,7 @@
   ],
   "dependencies": {
     "ado-save-config-btn": "^1.0.3",
-    "ado-ng-seconds-format": "^0.0.2"
+    "ado-ng-seconds-format": "^0.0.2",
+    "ado-ng-rpi3-gpio-ref": "^1.0.0"
   }
 }
