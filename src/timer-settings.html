@@ -1,5 +1,4 @@
 
-
 <h4>Rates</h4>
 
 <a class="btn btn-sm btn-primary" ng-click="$ctrl.newCredit()">
@@ -133,38 +132,71 @@
       <h4>Coinslot Wiring Settings</h4>
 
       <div ng-show="$ctrl.settings.hardware.model == 'raspberry_pi_3'" class="form-group" ng-class="{'has-error' : timerForm.sensor.$invalid, 'has-success': timerForm.sensor.$valid && timerForm.sensor.$dirty}">
-        <label>Coinslot Sensor Version</label>
-        <select class="form-control" ng-options="v as v for v in [1,2]" ng-model="$ctrl.settings.coinslot_sensor_version" name="sensor" required>
+        <label>Coinslot Sensor Type</label>
+        <select class="form-control" ng-options="v.val as v.desc for v in [{desc:'With Resistor(v1)', val:1}, {desc:'Without Resistor(v2)', val:2}, {desc: 'Serial Connection', val:4}]" ng-model="$ctrl.settings.coinslot_sensor_version" name="sensor" required>
         </select>
+        <span class="help-block" ng-show="$ctrl.settings.coinslot_sensor_version == 4">
+          <a href="https://www.adopisoft.com/blog/articles/setting-up-serial-coinslot-sensor" target="_blank">Click here to learn about serial connection sensor.</a>
+        </span>
       </div>
 
-      <div class="form-group" ng-class="{'has-error' : timerForm.coinslot_gpio_pin.$invalid, 'has-success': timerForm.coinslot_gpio_pin.$valid && timerForm.coinslot_gpio_pin.$touched}">
+      <div ng-show="$ctrl.settings.coinslot_sensor_version == 1 || $ctrl.settings.coinslot_sensor_version == 2 || $ctrl.settings.coinslot_sensor_version == 3" class="form-group" ng-class="{'has-error' : timerForm.coinslot_gpio_pin.$invalid, 'has-success': timerForm.coinslot_gpio_pin.$valid && timerForm.coinslot_gpio_pin.$touched}">
         <label>GPIO Pin for coin/white wire</label>
-        <select name="coinslot_gpio_pin" class="form-control" ng-model="$ctrl.settings.coinslot_gpio_pin" ng-options="pin as pin for pin in $ctrl.pins" required></select>
-        <span ado-rpi3-gpio-ref class="help-block"><a>CLICK HERE TO SHOW GPIO NUMBERING ON THE BOARD</a></span>
+        <!--<select name="coinslot_gpio_pin" class="form-control" ng-model="$ctrl.settings.coinslot_gpio_pin" ng-options="pin as pin for pin in $ctrl.pins" required></select>-->
+        <!-- TODO: check if model is rpi or espressobin -->
+        <input type="number" name="coinslot_gpio_pin" class="form-control" ng-model="$ctrl.settings.coinslot_gpio_pin" required>
+        <span class="help-block">(GPIO numbering base on RPI BOARD)</span>
+        <span ado-rpi3-gpio-ref class="help-block"><a>CLICK HERE TO SHOW RPI BOARD GPIO NUMBERING</a></span>
+      </div>
+
+      <div
+        ng-show="$ctrl.settings.coinslot_sensor_version === 4"
+        class="form-group"
+        ng-class="{'has-error': timerForm.serial_tty.$invalid}">
+        <label>Serial TTY</label>
+        <input type="text" ng-model="$ctrl.settings.serial_tty" required name="serial_tty" class="form-control">
+      </div>
+
+      <div
+        ng-show="$ctrl.settings.coinslot_sensor_version === 4"
+        class="form-group"
+        ng-class="{'has-error': timerForm.serial_boad_rate.$invalid}">
+        <label>Serial Boad Rate</label>
+        <input type="number" ng-model="$ctrl.settings.serial_boad_rate" required name="serial_boad_rate" class="form-control">
       </div>
       <hr>
-      <h4>Relay Settings</h4>
 
-      <div class="radio">
-        <label>
-          <input type="radio" name="active" ng-model="$ctrl.settings.coinslot_relay_active_low" ng-value="true">
-          Relay module is active low
-        </label>
-      </div>
+      <div ng-show="$ctrl.config.hardware.model == 'raspberry_pi_3'">
 
-      <div class="radio">
-        <label>
-          <input type="radio" name="active" ng-model="$ctrl.settings.coinslot_relay_active_low" ng-value="false">
-          Relay module is active high
-        </label>
-      </div>
+        <h4>Relay Settings</h4>
 
-      <div class="form-group" ng-class="{'has-error' : timerForm.delay.$invalid, 'has-success': timerForm.delay.$valid && timerForm.delay.$dirty}">
-        <label>Coinslot Relay Delay (in seconds)</label>
-        <input type="number" min="0" class="form-control" ng-model="$ctrl.settings.coinslot_relay_delay" name="delay" required>
-        <span class="help-block" ng-if="timerForm.delay.$error.required">Required.</span>
-        <span class="help-block" ng-if="timerForm.delay.$error.min">Minimum of 0 seconds</span>
+        <div class="form-group" ng-show="$ctrl.config.hardware.model == 'raspberry_pi_3'" ng-class="{'has-error': timerForm.relay_pin_number.$invalid}">
+          <label>Relay GPIO Pin</label>
+          <input type="number" ng-model="$ctrl.settings.relay_pin_number" name="relay_pin_number" required class="form-control">
+          <span class="help-block"><a href="https://raspberrypi.stackexchange.com/questions/12966/what-is-the-difference-between-board-and-bcm-for-gpio-pin-numbering" target="_blank">(GPIO numbering base on BCM Chip)</a></span>
+        </div>
+
+        <div class="radio">
+          <label>
+            <input type="radio" name="active" ng-model="$ctrl.settings.coinslot_relay_active_low" ng-value="true">
+            Relay module is active low
+          </label>
+        </div>
+
+        <div class="radio">
+          <label>
+            <input type="radio" name="active" ng-model="$ctrl.settings.coinslot_relay_active_low" ng-value="false">
+            Relay module is active high
+          </label>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error' : timerForm.delay.$invalid, 'has-success': timerForm.delay.$valid && timerForm.delay.$dirty}">
+          <label>Coinslot Relay Delay (in seconds)</label>
+          <input type="number" min="0" class="form-control" ng-model="$ctrl.settings.coinslot_relay_delay" name="delay" required>
+          <span class="help-block" ng-if="timerForm.delay.$error.required">Required.</span>
+          <span class="help-block" ng-if="timerForm.delay.$error.min">Minimum of 0 seconds</span>
+        </div>
+
       </div>
 
     </div>
@@ -184,7 +216,9 @@
   counter_timer: $ctrl.settings.counter_timer,
   max_payment_retries: $ctrl.settings.max_payment_retries,
   wait_payment_seconds: $ctrl.wait_payment_seconds * 60,
-  allow_pause: $ctrl.settings.allow_pause
+  allow_pause: $ctrl.settings.allow_pause,
+  serial_tty: $ctrl.settings.serial_tty,
+  serial_boad_rate: $ctrl.settings.serial_boad_rate
   }" ng-disabled="timerForm.$invalid || timerForm.$pristine">Save Changes</save-config-btn>
 
 </form>
@@ -193,3 +227,4 @@
 <p>
 Coinslot not working? <a href="http://adopisowifi.com/articles/fix-coinslot-not-working/" target="_blank">Try these solutions.</a>
 </p>
+
