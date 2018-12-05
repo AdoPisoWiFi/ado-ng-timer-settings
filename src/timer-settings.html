@@ -64,6 +64,18 @@
 
     <div class="col-md-6">
 
+      <h4>Free Trial</h4>
+      <div class="form-group" ng-class="{'has-error' : timerForm.first_time_trial.$invalid, 'has-success': timerForm.first_time_trial.$valid && timerForm.first_time_trial.$touched}">
+        <label>
+          Give free trial for first-time users (in minutes)
+        </label>
+        <input type="number" min="0" class="form-control" ng-model="$ctrl.first_time_trial" name="first_time_trial" required>
+        <span class="help-block" ng-if="timerForm.first_time_trial.$error.required">Required.</span>
+        <span class="help-block" ng-if="timerForm.first_time_trial.$error.min">Minimum of 0 min</span>
+      </div>
+
+      <hr>
+
       <h4>Pause Time Settings</h4>
 
       <div class="checkbox">
@@ -219,7 +231,8 @@
   allow_pause: $ctrl.settings.allow_pause,
   relay_pin_number: $ctrl.settings.relay_pin_number,
   serial_tty: $ctrl.settings.serial_tty,
-  serial_boad_rate: $ctrl.settings.serial_boad_rate
+  serial_boad_rate: $ctrl.settings.serial_boad_rate,
+  first_time_trial: $ctrl.settings.first_time_trial
   }" ng-disabled="timerForm.$invalid || timerForm.$pristine">Save Changes</save-config-btn>
 
 </form>
