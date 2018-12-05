@@ -69,7 +69,7 @@
         <label>
           Give free trial for first-time users (in minutes)
         </label>
-        <input type="number" min="0" class="form-control" ng-model="$ctrl.first_time_trial" name="first_time_trial" required>
+        <input type="number" min="0" class="form-control" ng-model="$ctrl.settings.first_time_trial" name="first_time_trial" required>
         <span class="help-block" ng-if="timerForm.first_time_trial.$error.required">Required.</span>
         <span class="help-block" ng-if="timerForm.first_time_trial.$error.min">Minimum of 0 min</span>
       </div>
