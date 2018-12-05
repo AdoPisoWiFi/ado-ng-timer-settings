@@ -86,19 +86,21 @@
         </div>
 
         <div ng-show="$ctrl.settings.first_time_trial_all">
+
           <div class="radio">
             <label>
-              <input type="radio" name="first_time_trial_all_with_time" ng-model="$ctrl.settings.first_time_trial_all_with_time" ng-value="true">
-              Include users that still has remaining time
+              <input type="radio" name="first_time_trial_all_with_time" ng-model="$ctrl.settings.first_time_trial_all_with_time" ng-value="false">
+              Include only users without remaining time
             </label>
           </div>
 
           <div class="radio">
             <label>
-              <input type="radio" name="first_time_trial_all_with_time" ng-model="$ctrl.settings.first_time_trial_all_with_time" ng-value="false">
-              Include only users without remaining time?
+              <input type="radio" name="first_time_trial_all_with_time" ng-model="$ctrl.settings.first_time_trial_all_with_time" ng-value="true">
+              Give free trial time to all users
             </label>
           </div>
+
         </div>
 
       </div>

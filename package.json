@@ -1,6 +1,6 @@
 {
   "name": "@adopisowifi/ng-timer-settings",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Angular.js 1.x module for changing AdoPisoWiFi Timer Settings",
   "main": "dist/ado-ng-timer-settings.js",
   "scripts": {
