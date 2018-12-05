@@ -64,47 +64,50 @@
 
     <div class="col-md-6">
 
-      <h4>Free Trial</h4>
-      <div class="form-group" ng-class="{'has-error' : timerForm.first_time_trial.$invalid, 'has-success': timerForm.first_time_trial.$valid && timerForm.first_time_trial.$touched}">
-        <label>
-          Give free trial for first-time users (in minutes)
-        </label>
-        <input type="number" min="0" class="form-control" ng-model="$ctrl.settings.first_time_trial" name="first_time_trial" required>
-        <span class="help-block" ng-if="timerForm.first_time_trial.$error.required">Required.</span>
-        <span class="help-block" ng-if="timerForm.first_time_trial.$error.min">Minimum of 0 min</span>
-      </div>
+      <div require-version="'3.0.81'" current-version="$ctrl.settings.version">
 
-      <div ng-show="$ctrl.settings.first_time_trial > 0">
-
-        <div class="checkbox">
-          <label class="custom-checkbox">
-            <input type="checkbox" name="first_time_trial_all" ng-model="$ctrl.settings.first_time_trial_all">
-            <span>
-              Include already registered users
-            </span>
+        <h4>Free Trial</h4>
+        <div class="form-group" ng-class="{'has-error' : timerForm.first_time_trial.$invalid, 'has-success': timerForm.first_time_trial.$valid && timerForm.first_time_trial.$touched}">
+          <label>
+            Give free trial for first-time users (in minutes)
           </label>
+          <input type="number" min="0" class="form-control" ng-model="$ctrl.settings.first_time_trial" name="first_time_trial" required>
+          <span class="help-block" ng-if="timerForm.first_time_trial.$error.required">Required.</span>
+          <span class="help-block" ng-if="timerForm.first_time_trial.$error.min">Minimum of 0 min</span>
         </div>
 
-        <div ng-show="$ctrl.settings.first_time_trial_all">
+        <div ng-show="$ctrl.settings.first_time_trial > 0">
 
-          <div class="radio">
-            <label>
-              <input type="radio" name="first_time_trial_all_with_time" ng-model="$ctrl.settings.first_time_trial_all_with_time" ng-value="false">
-              Include only users without remaining time
+          <div class="checkbox">
+            <label class="custom-checkbox">
+              <input type="checkbox" name="first_time_trial_all" ng-model="$ctrl.settings.first_time_trial_all">
+              <span>
+                Include already registered users
+              </span>
             </label>
           </div>
 
-          <div class="radio">
-            <label>
-              <input type="radio" name="first_time_trial_all_with_time" ng-model="$ctrl.settings.first_time_trial_all_with_time" ng-value="true">
-              Give free trial time to all users
-            </label>
+          <div ng-show="$ctrl.settings.first_time_trial_all">
+
+            <div class="radio">
+              <label>
+                <input type="radio" name="first_time_trial_all_with_time" ng-model="$ctrl.settings.first_time_trial_all_with_time" ng-value="false">
+                Include only users without remaining time
+              </label>
+            </div>
+
+            <div class="radio">
+              <label>
+                <input type="radio" name="first_time_trial_all_with_time" ng-model="$ctrl.settings.first_time_trial_all_with_time" ng-value="true">
+                Give free trial time to all users
+              </label>
+            </div>
+
           </div>
 
         </div>
 
       </div>
-
       <hr>
 
       <h4>Pause Time Settings</h4>
