@@ -74,6 +74,42 @@
         <span class="help-block" ng-if="timerForm.first_time_trial.$error.min">Minimum of 0 min</span>
       </div>
 
+      <div ng-show="$ctrl.settings.first_time_trial > 0">
+
+        <div class="checkbox">
+          <label class="custom-checkbox">
+            <input type="checkbox" name="first_time_trial_all" ng-model="$ctrl.settings.first_time_trial_all">
+            <span>
+              Include already registered users?
+            </span>
+          </label>
+        </div>
+
+        <!--<div class="checkbox" ng-show="$ctrl.settings.first_time_trial_all">-->
+        <!--  <label class="custom-checkbox">-->
+        <!--    <input type="checkbox" name="first_time_trial_all_with_time" ng-model="$ctrl.settings.first_time_trial_all_with_time">-->
+        <!--    <span>-->
+        <!--      Include users that still has remaining time?-->
+        <!--    </span>-->
+        <!--  </label>-->
+        <!--</div>-->
+
+        <div class="radio">
+          <label>
+            <input type="radio" name="first_time_trial_all_with_time" ng-model="$ctrl.settings.first_time_trial_all_with_time" ng-value="true">
+            Include users that still has remaining time?
+          </label>
+        </div>
+
+        <div class="radio">
+          <label>
+            <input type="radio" name="first_time_trial_all_with_time" ng-model="$ctrl.settings.first_time_trial_all_with_time" ng-value="false">
+            Include only users without remaining time?
+          </label>
+        </div>
+
+      </div>
+
       <hr>
 
       <h4>Pause Time Settings</h4>
@@ -232,7 +268,9 @@
   relay_pin_number: $ctrl.settings.relay_pin_number,
   serial_tty: $ctrl.settings.serial_tty,
   serial_boad_rate: $ctrl.settings.serial_boad_rate,
-  first_time_trial: $ctrl.settings.first_time_trial
+  first_time_trial: $ctrl.settings.first_time_trial,
+  first_time_trial_all: $ctrl.settings.first_time_trial_all,
+  first_time_trial_all_with_time: $ctrl.settings.first_time_trial_all_with_time
   }" ng-disabled="timerForm.$invalid || timerForm.$pristine">Save Changes</save-config-btn>
 
 </form>
