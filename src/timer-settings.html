@@ -191,8 +191,8 @@
         <!--<select name="coinslot_gpio_pin" class="form-control" ng-model="$ctrl.settings.coinslot_gpio_pin" ng-options="pin as pin for pin in $ctrl.pins" required></select>-->
         <!-- TODO: check if model is rpi or espressobin -->
         <input type="number" name="coinslot_gpio_pin" class="form-control" ng-model="$ctrl.settings.coinslot_gpio_pin" required>
-        <span class="help-block">(GPIO numbering base on RPI BOARD)</span>
-        <span ado-rpi3-gpio-ref class="help-block"><a>CLICK HERE TO SHOW RPI BOARD GPIO NUMBERING</a></span>
+        <span ng-show="$ctrl.settings.hardware.model == 'raspberry_pi_3'" class="help-block">(GPIO numbering base on RPI BOARD)</span>
+        <span ng-show="$ctrl.settings.hardware.model == 'raspberry_pi_3'" ado-rpi3-gpio-ref class="help-block"><a>CLICK HERE TO SHOW RPI BOARD GPIO NUMBERING</a></span>
       </div>
 
       <div
