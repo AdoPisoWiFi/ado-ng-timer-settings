@@ -179,7 +179,7 @@
 
       <div class="form-group" ng-class="{'has-error' : timerForm.sensor.$invalid, 'has-success': timerForm.sensor.$valid && timerForm.sensor.$dirty}">
         <label>Coinslot Sensor Type</label>
-        <select class="form-control" ng-options="v.val as v.desc for v in $ctrl.coinslot_versions($ctrl.settings)" ng-model="$ctrl.settings.coinslot_sensor_version" name="sensor" required>
+        <select class="form-control" ng-options="v.val as v.desc for v in $ctrl.coinslot_versions" ng-model="$ctrl.settings.coinslot_sensor_version" name="sensor" required>
         </select>
         <span class="help-block" ng-show="$ctrl.settings.coinslot_sensor_version == 4">
           <a href="https://www.adopisoft.com/blog/articles/setting-up-serial-coinslot-sensor" target="_blank">Click here to learn about serial connection sensor.</a>
