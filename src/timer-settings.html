@@ -212,11 +212,11 @@
       </div>
       <hr>
 
-      <div ng-show="$ctrl.config.hardware.model == 'raspberry_pi_3'">
+      <div>
 
         <h4>Relay Settings</h4>
 
-        <div class="form-group" ng-show="$ctrl.config.hardware.model == 'raspberry_pi_3'" ng-class="{'has-error': timerForm.relay_pin_number.$invalid}">
+        <div class="form-group" ng-class="{'has-error': timerForm.relay_pin_number.$invalid}">
           <label>Relay GPIO Pin</label>
           <input type="number" ng-model="$ctrl.settings.relay_pin_number" name="relay_pin_number" required class="form-control">
           <span class="help-block"><a href="https://raspberrypi.stackexchange.com/questions/12966/what-is-the-difference-between-board-and-bcm-for-gpio-pin-numbering" target="_blank">(GPIO numbering base on BCM Chip)</a></span>
