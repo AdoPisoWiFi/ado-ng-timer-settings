@@ -94,6 +94,21 @@
           }
         };
 
+        $ctrl.coinslot_versions = function (settings) {
+          var model = settings.hardware.model;
+          var versions = [{desc:'With Resistor(v1)', val:1}, {desc:'Without Resistor(v2)', val:2}, {desc: 'BCM GPIO', val: 3}, {desc: 'Serial Connection', val:4}];
+
+          if (model == 'raspberry_pi_3') {
+            return versions.filter(function (v) {
+              return v.val == 1 || v.val == 2 || v.val == 4;
+            });
+          } else {
+            return versions.filter(function (v) {
+              return v.val == 3 || v.val == 4; 
+            });
+          }
+        };
+
       };
 
     }]);
