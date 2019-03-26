@@ -72,12 +72,8 @@ angular.module('ado.timer-settings.tpls', []).run(['$templateCache', function($t
 
         function update(timer) {
           timer = timer.filter(function (t) {
-            return t.pulse > 0 && t.minutes > 0;
-          })
-            .map(function(t) {
-              t.credits = t.pulse;
-              return t;
-            });
+            return t.pulse > 0 && t.minutes > 0 && t.credits > 0;
+          });
           return adoConfigService.update({timer: timer}, {id: $ctrl.device.id})
             .then(function (res) {
               parseScopeConfig(res);
@@ -87,7 +83,7 @@ angular.module('ado.timer-settings.tpls', []).run(['$templateCache', function($t
 
         $ctrl.onCancel = function (i, t) {
           $ctrl.settings.timer = $ctrl.settings.timer.filter(function (t) {
-            return t.pulse > 0 && t.minutes > 0;
+            return t.pulse > 0 && t.minutes > 0 && t.credits > 0;
           });
         };
 
@@ -113,10 +109,6 @@ angular.module('ado.timer-settings.tpls', []).run(['$templateCache', function($t
             return update(timer);
           }
         };
-
-        //$ctrl.coinslot_versions = function (settings) {
-
-        //};
 
       };
 
