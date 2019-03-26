@@ -26,10 +26,9 @@
           {{ t.pulse }}
         </span>
       </td>
-      <td class="hidden-xs hidden-sm">
-        <span ng-show="$ctrl.inserted == t">(amount = pulses)</span>
-        <span ng-show="$ctrl.inserted != t">
-          {{ t.pulse | number:2 }}
+      <td>
+        <span editable-number="t.credits" e-name="credits" e-form="rowform" e-required e-class="form-control">
+          {{ t.credits }}
         </span>
       </td>
       <td class="select-td" ng-class="{'text-danger': !t.minutes || t.credits <= 0}">
